@@ -27,7 +27,7 @@ European employers expect a CV and cover letter tailored to each ad. Read `refer
    - Pitch the wording at a technical reader with standard industry terms; avoid only private jargon you coined yourselves. Well-known acronyms (LLM, RAG, SQL, CI/CD) stay as acronyms.
    - Compare the tailored CV with the general one (`diff` of the `pdftotext` output) and **list every difference for the user** (rewritten, added, dropped). A missing item must be a decision the user can see.
 6. **Write the cover letter.** Learn from the principles file; don't fill it in like a form. Take the recruiter's view and make their problem the main character; show with real examples how the user became the person they need; show technical and soft skills; say what the user hopes to learn. The letter reads as one story: the ad's problem → the closest real experience → what it taught or left open → why this role. Don't open every paragraph the same way, and avoid stock phrases.
-   - **Length: about 350–420 words** of body text. Count with `pdftotext … | awk '/Dear/{f=1} f' | sed '/Warm regards/,$d' | wc -w`.
+   - **Length: 280–330 words** of body text; keep one experience per paragraph and cut what only repeats the CV. Count with `pdftotext … | awk '/Dear/{f=1} f' | sed '/Warm regards/,$d' | wc -w`.
    - Don't pad. If no course truly matches the ad, say what the degree and recent work have in common instead of listing courses. Keep gaps to one short clause.
    - Don't skip the motivation paragraph: what about this team or topic draws the user.
    - **Subject line:** specific, not generic: title or education + the ad's key term (“MSc student in … — thesis on LLM agent evaluation”), never “Application for …” (from ai-job-search).
