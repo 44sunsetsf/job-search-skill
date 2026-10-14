@@ -1,0 +1,6 @@
+{
+  "materials": "~/job-materials",
+  "chalmers_subjects": {"AI": 9, "Computer engineering": 18, "IT": 10, "Programming": 52},
+  "queries": ["master thesis", "thesis worker", "examensarbete", "exjobb"],
+  "locations": ["Sweden"]
+}
