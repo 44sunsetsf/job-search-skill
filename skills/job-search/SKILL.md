@@ -65,4 +65,4 @@ If `config.json` is missing or its folder does not exist:
 
 ## Credits
 
-Stages 1, 3 and 4 and several checks are adapted from [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) (MIT): eligibility and language gates, the fit score, application-link check, ATS keyword table, interview backtrack test, the independent reviewer, company notes, follow-ups, outcome reviews, interview packs, and the two vendored PDF checkers. The one-page CV rules, the writing rules and the cover-letter approach (based on Chalmers Career Services guidance) are this repo's own.
+Stages 1, 3 and 4 and several checks are adapted from [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) (MIT): eligibility and language gates, the fit score, application-link check, ATS keyword table, interview backtrack test, the independent reviewer, company notes, follow-ups, outcome reviews, interview packs, and the two vendored PDF checkers. The one-page CV rules, the writing rules and the cover-letter approach (based on Chalmers Career Services guidance) are this repo's own. Where the two sources conflict, the Chalmers guidance wins.
