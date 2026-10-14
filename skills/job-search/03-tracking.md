@@ -2,7 +2,7 @@
 
 ## The log
 
-`applications/log.md`: one row per application (company, role, id, place, materials done, submitted, deadline, status, tag). Updated, never replaced. When the user says “已投了”, “面试了”, “被拒了”, update the row in the same turn. If you also keep a tracker (spreadsheet, browser extension), update it at the same time. Stages: to apply / applied / test / interview 1 / interview 2 / offer / rejected / no reply.
+`applications/log.md`: one row per application (company, role, id, place, materials done, submitted, deadline, status, tag). Updated, never replaced. When the user says “已投了”, “面试了”, “被拒了”, update the row in the same turn. If you also keep a tracker (spreadsheet, browser extension), update it at the same time. Before finishing, compare the two once (every log row present, same status); a stale copy in one of them is easy to miss. Stages: to apply / applied / test / interview 1 / interview 2 / offer / rejected / no reply.
 
 ## Reading the inbox (“查邮件”)
 
