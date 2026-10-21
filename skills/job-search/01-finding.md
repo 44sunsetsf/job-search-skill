@@ -28,6 +28,10 @@ Ads already in `applications/log.md` and ids in `leads/seen.json` are left out a
 4. Check where the application link goes. The employer's own site or a known applicant system (Workday, SmartRecruiters, Teamtailor, Varbi, ReachMee, Greenhouse, Lever, Jobylon) is fine; anything else is named as unverified so the user checks it before applying.
 5. After the user decides, mark the rejected ads as seen. Recommended ads not yet decided go into the user's todo list with their deadline.
 6. When an ad names a contact and there is a real question (English OK? two students? location?), offer a short email draft for the user to send.
+7. **Referral links** (adapted from ai-job-search Step 4.5). For every job (not thesis ads, which already name a supervisor) rated high or medium fit, add two LinkedIn people-search links to its row, so the user can look for a referral or a warm intro:
+   - recruiters: `https://www.linkedin.com/search/results/people/?keywords=<url-encoded "<Company> recruiter">&origin=GLOBAL_SEARCH_HEADER`
+   - team peers: the same URL with `"<Company> <short role keyword from the title>"`.
+   These are links for the user to open; never fetch or scrape the result pages, and never name a person as found. If the user picks someone, draft a short message for the user to send.
 
 ## Graduate jobs abroad
 
