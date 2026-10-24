@@ -66,7 +66,7 @@ European employers expect a CV and cover letter tailored to each ad. Read `refer
 4. Ask whether to send a short joint email to the contact first. The user sends it; Claude only drafts.
 5. Note the partner in the log row.
 6. Never write or edit the partner's CV or other materials, even when the user says "our materials" or the partner's version looks weak. Only the user's own CV, letter (a joint letter may mention the partner) and emails are yours to write; if the partner's CV seems to hurt the application, say so in one line and leave it to them.
-6. **Never commit the partner's own files** (CV, letters, joint statements); they usually carry phone numbers and email addresses. Keep the originals outside the repo and copy the one to upload into `applications/current/` as `partner_<name>`, which is gitignored.
+7. **Never commit the partner's own files** (CV, letters, joint statements); they usually carry phone numbers and email addresses. Keep the originals outside the repo and copy the one to upload into `applications/current/` as `partner_<name>`, which is gitignored.
 
 ## Retrieving or revising past applications
 
