@@ -1,0 +1,35 @@
+{
+  "_comment": "Tool stacks YOU do not have (from job-scan's profile_gap_gate). A group is flagged when at least `min_hits` of its patterns occur in the ad; the flag caps the fit score. Edit the groups to your own gaps, then set enabled to true. A scoring signal only: it never removes a skill from a CV.",
+  "enabled": false,
+  "min_hits": 2,
+  "groups": [
+    {
+      "name": "MATLAB/Simulink",
+      "cap": 55,
+      "patterns": [
+        "\\bmatlab\\b",
+        "\\bsimulink\\b",
+        "\\bstateflow\\b"
+      ]
+    },
+    {
+      "name": "Java/JVM",
+      "cap": 55,
+      "patterns": [
+        "\\bjava\\b",
+        "spring boot",
+        "\\bkotlin\\b",
+        "\\bjvm\\b"
+      ]
+    },
+    {
+      "name": "FPGA/HDL",
+      "cap": 55,
+      "patterns": [
+        "\\bfpga\\b",
+        "\\bvhdl\\b",
+        "\\bverilog\\b"
+      ]
+    }
+  ]
+}

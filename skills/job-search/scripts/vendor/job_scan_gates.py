@@ -5,7 +5,9 @@ Adapted from 1carusalwayswa/job-scan (MIT, see LICENSE-job-scan), commit 8284984
 lang_gate.py, citizenship_gate.py and the staffing half of pre_gate.py, merged into one module with the
 JSONL plumbing and scores removed. Their reason for doing this with regexes instead of a prompt: prompt-only
 gating failed three times in a row (the model wrote "exclude" in its reason but scored 76-82).
-Local additions: the work-permit patterns (EU graduate jobs) and "bae systems" in the restricted list.
+Local additions: the work-permit patterns (EU graduate jobs), "bae systems" in the restricted list, Platsbanken's
+structured must-have languages and occupation fields (as in their lang_gate.py and pre_gate.py), and the profile-gap
+groups of their profile_gap_gate.py read from job_scan_data/profile_gaps.json.
 
 Prefers false negatives (left to the model's own reading) over false positives: a phrase inside a
 merit / nice-to-have line or section is exempt.
@@ -130,22 +132,52 @@ def _company_re(name: str, key: str) -> re.Pattern:
 
 
 RESTRICTED = _company_re("restricted_employers.json", "company_patterns")
+GAPS = json.loads((DATA / "profile_gaps.json").read_text(encoding="utf-8"))
+
+# Platsbanken occupation groups that are IT operations / support rather than development (pre_gate.py's default list)
+EXCLUDED_GROUPS = ["drifttekniker", "supporttekniker", "nätverks- och systemtekniker", "chefer inom it", "it-chefer"]
+IT_FIELD = "data/it"
+
+
+def profile_gaps(text: str) -> list[str]:
+    """Groups of tool stacks the user lacks that the ad asks for (at least min_hits patterns matched)."""
+    if not GAPS.get("enabled"):
+        return []
+    out = []
+    for g in GAPS["groups"]:
+        found = sorted({m.group(0) for p in g["patterns"] for m in re.finditer(p, text or "", re.IGNORECASE)},
+                       key=str.lower)
+        if len(found) >= GAPS.get("min_hits", 2):
+            out.append(f"缺技术栈 {g['name']}（{'、'.join(found[:4])}）→ 对口分封顶 {g['cap']}")
+    return out
 STAFFING = _company_re("staffing_companies.json", "patterns")
 
 
-def check(employer: str, text: str) -> list[str]:
-    """Return one short Chinese label per gate hit, quoting what matched."""
+def check(employer: str, text: str, must_languages: list[str] | None = None,
+          occupation_group: str = "", occupation_field: str = "") -> list[str]:
+    """Return one short Chinese label per gate hit, quoting what matched.
+
+    must_languages / occupation_*: Platsbanken's structured fields, when the ad has them."""
     hits = []
     if m := RESTRICTED.search(employer or ""):
         hits.append(f"国籍/安全审查：受限雇主「{m.group(0)}」")
     elif frag := _first_hit(text or "", CLEARANCE_PATTERNS, SAME_LINE_EXEMPT, 80):
         hits.append(f"国籍/安全审查：「{frag}」")
-    if frag := _first_hit(text or "", LANG_PATTERNS, LANG_EXEMPT_NEAR, 60):
+    svensk = [l for l in must_languages or [] if "svensk" in l.lower() or "swedish" in l.lower()]
+    if svensk:
+        hits.append(f"瑞典语硬性要求：雇主勾选必须语言「{svensk[0]}」")
+    elif frag := _first_hit(text or "", LANG_PATTERNS, LANG_EXEMPT_NEAR, 60):
         hits.append(f"瑞典语硬性要求：「{frag}」")
     if frag := _first_hit(text or "", PERMIT_PATTERNS, SAME_LINE_EXEMPT, 80):
         hits.append(f"工作许可：「{frag}」")
     if m := STAFFING.search(employer or ""):
         hits.append(f"中介（bemanning）：「{m.group(0)}」")
+    group = (occupation_group or "").lower()
+    if group and any(g in group for g in EXCLUDED_GROUPS):
+        hits.append(f"职业类别是运维/支持：「{occupation_group}」")
+    elif occupation_field and occupation_field.lower() != IT_FIELD:
+        hits.append(f"职业类别不是 IT：「{occupation_field}」")
+    hits += profile_gaps(text)
     return hits
 
 

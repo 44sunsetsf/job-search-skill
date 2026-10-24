@@ -207,12 +207,23 @@ def platsbanken_search(queries, days: int, **_) -> list[dict]:
                            h["publication_date"][:10], (h.get("application_deadline") or "")[:10],
                            (h.get("application_details") or {}).get("url") or h.get("webpage_url") or "",
                            ((h.get("description") or {}).get("text") or "")[:1500]))
+            out[-1]["gate"] = pb_gate_fields(h)
     return out
+
+
+def pb_gate_fields(h: dict) -> dict:
+    """Platsbanken's structured fields for the gates: employer-ticked must-have languages and the occupation."""
+    return {"must_languages": [l.get("label") or "" for l in (h.get("must_have") or {}).get("languages") or []],
+            "occupation_group": (h.get("occupation_group") or {}).get("label") or "",
+            "occupation_field": (h.get("occupation_field") or {}).get("label") or ""}
 
 
 def platsbanken_detail(jid: str) -> str:
     h = json.loads(fetch(f"{PB}/ad/{jid}", accept="application/json"))
+    g = pb_gate_fields(h)
     return (f"# {h['headline']}\n雇主：{(h.get('employer') or {}).get('name')}\n"
+            f"必须语言：{'、'.join(g['must_languages']) or '—'}\n"
+            f"职业：{g['occupation_group'] or '—'}｜{g['occupation_field'] or '—'}\n"
             f"截止：{(h.get('application_deadline') or '')[:10]}\n"
             f"链接：{(h.get('application_details') or {}).get('url') or h.get('webpage_url')}\n\n"
             + ((h.get("description") or {}).get("text") or ""))
@@ -300,7 +311,12 @@ def main() -> None:
         src, _, jid = a.detail.partition(":")
         body = DETAIL[ALIASES.get(src, src)](jid)
         emp = re.search(r"^雇主：(.*)$", body, re.M)
-        hits = gate_check(emp.group(1) if emp else "", body)
+        langs = re.search(r"^必须语言：(.*)$", body, re.M)
+        occ = re.search(r"^职业：(.*)｜(.*)$", body, re.M)
+        hits = gate_check(emp.group(1) if emp else "", body,
+                          must_languages=[x for x in (langs.group(1).split("、") if langs else []) if x != "—"],
+                          occupation_group=occ.group(1).strip("—") if occ else "",
+                          occupation_field=occ.group(2).strip("—") if occ else "")
         print(("⚠ 门槛：" + "；".join(hits) if hits else "门槛：未发现（正则只是提示，仍要读全文）") + "\n")
         print(body)
         return
@@ -349,7 +365,7 @@ def main() -> None:
             due += " 🔥" if 0 <= left <= 7 else (" ⚠已过" if left < 0 else "")
         print(f"| {j['key']} | {j['published'] or '—'} | {due} | {j['employer'] or '—'} | "
               f"{j['title'].replace('|', '/')} | {j['place'] or '—'} | "
-              f"{'；'.join(gate_check(j['employer'], j['snippet'])).replace('|', '/') or '—'} | {j['url']} |")
+              f"{'；'.join(gate_check(j['employer'], j['snippet'], **j.get('gate', {}))).replace('|', '/') or '—'} | {j['url']} |")
 
 
 if __name__ == "__main__":
