@@ -130,7 +130,7 @@ def chalmers_detail(jid: str) -> str:
     s = fetch(f"{CH}/Details/{jid}")
     i = s.find(">", s.find("OpportunityViewModel_Title_Display")) + 1
     t = text_of(s[i:])
-    return t.split("Subscribe", 1)[0][:8000]
+    return re.split(r"Subscribe|Page manager:", t, maxsplit=1)[0][:40000]
 
 
 # ---------- LinkedIn ----------
