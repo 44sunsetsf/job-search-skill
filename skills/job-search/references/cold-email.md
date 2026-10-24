@@ -10,7 +10,7 @@ Researched 2026-10-24. Sources: Steve Dalton, *The 2-Hour Job Search* (5-point e
 4. **One proof, not a CV.** The single strongest, true piece of evidence (with a number if there is one). Everything else is attached or linked.
 5. **One small ask.** Consider us; a 15-minute chat; or “who would be the right person to ask?”. Never several asks.
 6. **Short.** Body of about 75–125 words, under six sentences. Plain sentences, the user's own register; never a template copied word for word.
-7. **Questions only when they earn their place.** Good cold emails often carry one genuine question, and it can be the ask itself (“Would the project be open to two students?”, “Who would be the right person to talk to about X?”). Never a list of questions, never one the ad already answers, never one asked only to seem engaged. **No proposed meeting times**: say you would be glad to meet soon.
+7. **Questions only when they earn their place.** Good cold emails often carry one genuine question, and it can be the ask itself (“Would the project be open to two students?”, “Who would be the right person to talk to about X?”). Never a list of questions, never one the ad already answers, never one asked only to seem engaged. **Meeting times:** offering two or three slots is good practice, but only after checking the user's calendar (Outlook, course deadlines, exams) and confirming the slots with them; always leave the recipient room to pick another time.
 8. **Name attachments plainly** (CV, transcript, cover letter), matching the file names.
 
 ## Three situations
