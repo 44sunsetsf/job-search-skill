@@ -42,7 +42,7 @@ The user's materials live in one folder, the **materials folder**, ideally its o
 
 Earlier applications are not kept as copies: each one is a git tag (`apply/<company>-<slug>-<id>`) on the commit that holds exactly what was sent.
 
-Scripts in `scripts/`: `find_jobs.py` (search), `check_bullets.py` (two-line bullets, section order), `vendor/verify_pdf.py`, `vendor/verify_layout.py` and `vendor/posting_guard.py` (from ai-job-search, MIT).
+Scripts in `scripts/`: `find_jobs.py` (search), `check_bullets.py` (two-line bullets, section order), `vendor/verify_pdf.py`, `vendor/verify_layout.py` and `vendor/posting_guard.py` (from ai-job-search, MIT), `vendor/job_scan_gates.py` and `vendor/fetch_careers.py` (from job-scan, MIT).
 
 ## Setup (first run)
 
@@ -66,3 +66,5 @@ If `config.json` is missing or its folder does not exist:
 ## Credits
 
 Stages 1, 3 and 4 and several checks are adapted from [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) (MIT): eligibility and language gates, the fit score, application-link check, ATS keyword table, interview backtrack test, the independent reviewer, company notes, follow-ups, outcome reviews, interview packs, the two vendored PDF checkers and the posting guard. The one-page CV rules, the writing rules and the cover-letter approach (based on Chalmers Career Services guidance) are this repo's own. Where the two sources conflict, the Chalmers guidance wins.
+
+The deterministic gates, the careers-page fetcher, the fit-score caps and calibration come from [1carusalwayswa/job-scan](https://github.com/1carusalwayswa/job-scan) (MIT); hidden nice-to-haves, the company-name swap test, naming left-out entries and a few writing rules from [1carusalwayswa/apply](https://github.com/1carusalwayswa/apply) (MIT).

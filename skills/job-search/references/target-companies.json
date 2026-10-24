@@ -1,0 +1,18 @@
+{
+  "_comment": "Companies whose own careers pages find_jobs.py -s careers reads (scripts/vendor/fetch_careers.py, from job-scan). Platform is detected from the URL or the note. Checked 2026-10-24. The Volvo URLs are filtered to Sweden (their unfiltered pages are global); change locationsearch for EU searches in 2027. 'browser_only' pages render jobs with JavaScript or block scripts: open them in the user's Chrome when a broad search is wanted. Saab, FMV, FOI and other restricted employers are left out on purpose (clearance gate).",
+  "companies": [
+    {"name": "Volvo Cars", "careers_url": "https://jobs.volvocars.com/search/?q=&locationsearch=Sweden", "note": "successfactors"},
+    {"name": "Volvo Group", "careers_url": "https://jobs.volvogroup.com/search/?q=&locationsearch=Sweden", "note": "successfactors"},
+    {"name": "Polestar", "careers_url": "https://polestar.teamtailor.com/jobs", "note": "teamtailor"},
+    {"name": "Zenseact", "careers_url": "https://career.zenseact.com/jobs", "note": "teamtailor"},
+    {"name": "RISE", "careers_url": "https://career.ri.se/jobs", "note": "teamtailor"},
+    {"name": "Qamcom", "careers_url": "https://career.qamcom.com/jobs", "note": "teamtailor"},
+    {"name": "Knowit", "careers_url": "https://career.knowit.se/jobs", "note": "teamtailor"}
+  ],
+  "browser_only": [
+    {"name": "Ericsson", "careers_url": "https://jobs.ericsson.com/careers"},
+    {"name": "Spotify", "careers_url": "https://www.lifeatspotify.com/jobs"},
+    {"name": "Scania", "careers_url": "https://jobs.scania.com/"},
+    {"name": "Ericsson (SmartRecruiters)", "careers_url": "https://careers.smartrecruiters.com/Ericsson1"}
+  ]
+}
