@@ -1,5 +1,7 @@
 # job-search — a Claude Code skill for the whole job hunt
 
+English | [中文](README.zh-CN.md)
+
 A [Claude Code](https://claude.com/claude-code) skill that runs a student's job search from finding an ad to recording the outcome. Built for master's thesis positions and graduate jobs in Sweden and the EU, with a stage for Chinese campus recruiting (国内秋招). Written by a Chalmers master's student while applying; the rules come from real applications.
 
 **You stay in control: Claude drafts, checks and reviews; you submit every application and send every email.**
